@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <script>
+            const canvas = document.querySelector('#canvas')
+            function draw(fn){
+                if(canvas.getContext){
+                    ctx = canvas.getContext('2d')
+                    fn && fn(ctx)
+                }
+            }
+
+            draw(function(ctx){
+                ctx.fillStyle = '#c33'
+                ctx.fillRect(10, 10, 50, 50)
+
+                ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+                ctx.fillRect (30, 30, 55, 50);
+            })
+        </script>
+    </body>
+</html>

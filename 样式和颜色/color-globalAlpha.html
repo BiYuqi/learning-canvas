@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <script>
+            const canvas = document.querySelector('#canvas')
+            function draw(fn){
+                if(canvas.getContext){
+                    ctx = canvas.getContext('2d')
+                    fn && fn(ctx)
+                }
+            }
+            // 除了可以绘制实色图形，我们还可以用 canvas 来绘制半透明的图形。通过设置 globalAlpha
+            // 属性或者使用一个半透明颜色作为轮廓或填充的样式。
+            draw(function(ctx){
+                ctx.fillStyle = "green"
+                ctx.fillRect(0,0,75,75)
+                ctx.fillStyle = "red"
+                ctx.fillRect(75,0,75,75)
+                ctx.fillStyle = "yellow"
+                ctx.fillRect(0,75,75,75)
+                ctx.fillStyle = "purple"
+                ctx.fillRect(75,75,75,75)
+
+                ctx.fillStyle = "#fff"
+                // 设置透明度值   // ctx.fillStyle = "rgba(255,255,255,.9)"
+                ctx.globalAlpha = 0.2;
+
+                for(let i=0;i<8;i++){
+                    ctx.beginPath()
+                    ctx.arc(75,75,4+10*i,0,Math.PI*2,true)
+                    ctx.fill()
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style media="screen">
+            canvas{
+                margin: 0 auto;
+                width: 820px;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" width="820" height="820"></canvas>
+        <script>
+            const canvas = document.querySelector('#canvas')
+            function draw(fn){
+                if(canvas.getContext){
+                    ctx = canvas.getContext('2d')
+                    fn && fn(ctx)
+                }
+            }
+            /*
+                lineWidth = value
+                    设置线条宽度。
+                lineCap = type
+                    设置线条末端样式。
+                lineJoin = type
+                    设定线条与线条间接合处的样式。
+                miterLimit = value
+                    限制当两条线相交时交接处最大长度；
+                    所谓交接处长度（斜接长度）是指线条交接处内角顶点到外角顶点的长度。
+                getLineDash()
+                    返回一个包含当前虚线样式，长度为非负偶数的数组。
+                setLineDash(segments)
+                    设置当前虚线样式。
+                lineDashOffset = value
+                    设置虚线样式的起始偏移量。
+            */
+            draw(function(ctx){
+                ctx.lineWidth = 1
+                const limeWidth = 40 // 方块宽度
+                for(let i=0;i<21;i++){
+                    ctx.beginPath()
+                    ctx.moveTo(i*limeWidth+0.5,0)
+                    ctx.lineTo(i*limeWidth+0.5,800)
+                    ctx.stroke()
+                }
+                for(let j=0;j<21;j++){
+                    ctx.beginPath()
+                    ctx.moveTo(0,j*limeWidth+0.5)
+                    ctx.lineTo(800,j*limeWidth+0.5)
+                    ctx.stroke()
+                }
+                function windowToCanvas(canvas,x,y){
+                    var data = canvas.getBoundingClientRect();
+                    return {
+                        x:Math.round((x-data.left) / limeWidth),
+                        y:Math.round((y-data.top) / limeWidth)
+                    }
+                }
+                const res = {} // 临时加个拦截
+                document.querySelector('#canvas').addEventListener('mousedown',function(e){
+                    var a = windowToCanvas(document.querySelector('#canvas'),e.clientX,e.clientY)
+                    if(!res[a.x+'-'+a.y]){
+                        ctx.beginPath()
+                        ctx.arc(a.x*limeWidth,a.y*limeWidth,10,0,Math.PI*2,true)
+                        ctx.fill()
+                        res[a.x+'-'+a.y] = 'white'
+
+                    }else{
+                        console.log("覆盖")
+                        console.log(res)
+                    }
+                },false)
+            })
+        </script>
+    </body>
+</html>

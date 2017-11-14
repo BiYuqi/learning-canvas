@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <script>
+            const canvas = document.querySelector('#canvas')
+            function draw(fn){
+                if(canvas.getContext){
+                    ctx = canvas.getContext('2d')
+                    fn && fn(ctx)
+                }
+            }
+            // lineTo(x, y)
+            //     绘制一条从当前位置到指定x以及y位置的直线
+            // 该方法有两个参数：x以及y ，代表坐标系中直线结束的点。
+            // 开始点和之前的绘制路径有关，之前路径的结束点就是接下来的开始点，等等。。。
+            // 开始点也可以通过moveTo()函数改变。
+            draw(function(ctx){
+                // 填充三角形
+                ctx.beginPath()
+                ctx.moveTo(25,25)
+                ctx.lineTo(105,25)
+                ctx.lineTo(25,105)
+                ctx.fill()
+
+                //
+                ctx.beginPath()
+                ctx.moveTo(125,125)
+                ctx.lineTo(125,45)
+                ctx.lineTo(45,125)
+                ctx.closePath();
+                ctx.stroke()
+            })
+        </script>
+    </body>
+</html>

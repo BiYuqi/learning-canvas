@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <script>
+            const canvas = document.querySelector('#canvas')
+            function draw(fn){
+                if(canvas.getContext){
+                    ctx = canvas.getContext('2d')
+                    fn && fn(ctx)
+                }
+            }
+            // 引入图像到canvas里需要以下两步基本操作：
+            //     获得一个指向HTMLImageElement的对象或者另一个canvas元素的引用作为源，也可以通过提供一个URL的方式来使用图片（参见例子）
+            //     使用drawImage()函数将图片绘制到画布上
+
+            // 缩放 Scaling
+            // drawImage(image, x, y, width, height)
+            //     这个方法多了2个参数：width 和 height，这两个参数用来控制 当像canvas画入时应该缩放的大小
+            draw(function(ctx){
+                const q = 0.8
+                function drawss() {
+                    var img = new Image();
+                    img.onload = function(){
+                        var w = img.naturalWidth * q,
+                            h = img.naturalHeight * q;
+                        console.log(w,h)
+                        ctx.drawImage(img,0,0,w,h);
+                        ctx.beginPath();
+                        ctx.moveTo(30,96);
+                        ctx.lineTo(70,66);
+                        ctx.lineTo(103,76);
+                        ctx.lineTo(170,15);
+                        ctx.lineTo(180,50);
+                        ctx.lineTo(190,48);
+                        ctx.stroke();
+                    }
+                    img.src = 'https://tse2-mm.cn.bing.net/th?id=OIP.X3r-Wq4-hV9ifelVcnkSSAEsCo&w=300&h=168&c=7&qlt=90&o=4&pid=1.7';
+                  }
+                  drawss()
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <script>
+            const canvas = document.querySelector('#canvas')
+            function draw(fn){
+                if(canvas.getContext){
+                    ctx = canvas.getContext('2d')
+                    fn && fn(ctx)
+                }
+            }
+            // arc(x, y, radius, startAngle, endAngle, anticlockwise)
+            //     画一个以（x,y）为圆心的以radius为半径的圆弧（圆），
+            //     从startAngle开始到endAngle结束，按照anticlockwise给定的方向（默认为顺时针）来生成。
+            // arc()函数中的角度单位是弧度，不是度数。角度与弧度的js表达式:radians=(Math.PI/180)*degrees
+            draw(function(ctx){
+                for(let i=0;i<4;i++){
+                    for(let j=0;j<3;j++){
+                        ctx.beginPath()
+                        const x = 25+j*50
+                        const y = 25+i*50
+                        const radius = 20
+                        const startAngle = 0
+                        const endAngle = Math.PI+(Math.PI*j)/2
+                        const anticlockwise  = i%2==0 ? false : true; // 顺时针或逆时针
+
+                        ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+
+                        if (i>1){
+                          ctx.fill();
+                        } else {
+                          ctx.stroke();
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

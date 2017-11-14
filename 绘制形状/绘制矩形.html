@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <script>
+            /**canvas提供了三种方法绘制矩形
+
+                fillRect(x, y, width, height)
+                绘制一个填充的矩形
+
+                strokeRect(x, y, width, height)
+                绘制一个矩形的边框
+
+                clearRect(x, y, width, height)
+                清除指定矩形区域，让清除部分完全透明
+
+            */
+            const canvas = document.querySelector('#canvas')
+            function draw(fn){
+                if(canvas.getContext){
+                    ctx = canvas.getContext('2d')
+                    fn && fn(ctx)
+                }
+            }
+
+            draw(function(ctx){
+                ctx.fillRect(25, 25, 100, 100)
+                ctx.clearRect(45,45,60,60)
+                ctx.strokeRect(50, 50, 50, 50)
+            })
+            // fillRect()函数绘制了一个边长为100px的黑色正方形。
+            // clearRect()函数从正方形的中心开始擦除了一个60*60px的正方形，
+            // 接着strokeRect()在清除区域内生成一个50*50的正方形边框。
+        </script>
+    </body>
+</html>

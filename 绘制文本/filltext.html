@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <script>
+            const canvas = document.querySelector('#canvas')
+            function draw(fn){
+                if(canvas.getContext){
+                    ctx = canvas.getContext('2d')
+                    fn && fn(ctx)
+                }
+            }
+            // fillText(text, x, y [, maxWidth])
+            //     在指定的(x,y)位置填充指定的文本，绘制的最大宽度是可选的.
+            // strokeText(text, x, y [, maxWidth])
+            //     在指定的(x,y)位置绘制文本边框，绘制的最大宽度是可选的.
+            draw(function(ctx){
+                ctx.font = "48px Microsoft YaHei";
+                // ctx.fillText("Hello world", 10, 50);
+                ctx.strokeText("Hello world", 10, 50);
+            })
+        </script>
+    </body>
+</html>
