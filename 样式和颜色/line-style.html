@@ -38,6 +38,8 @@
                     设置虚线样式的起始偏移量。
             */
             draw(function(ctx){
+                // 为了让棋盘都显示 左上
+                ctx.translate(10,10)
                 ctx.lineWidth = 1
                 const limeWidth = 40 // 方块宽度
                 for(let i=0;i<21;i++){
